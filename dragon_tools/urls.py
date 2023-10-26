@@ -24,6 +24,8 @@ from django.conf.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tools.urls', namespace='tools')),
+    # https://github.com/Starcross/django-starcross-gallery
+    path('gallery/', include('gallery.urls')),
 
 ]
 
