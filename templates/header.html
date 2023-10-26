@@ -18,6 +18,7 @@
                             <ul class="dropdown-menu">
                                 {% block decode_qr_code_block %}<li>{% endblock %} <a href="{% url 'tools:decode_qr_code' %}">Decode</a></li>
 								{% block create_wifi_qrcode_pic_block %}<li>{% endblock %} <a href="{% url 'tools:create_wifi_qrcode_pic' %}">Wifi Code</a></li>
+								{% block qrcode-toolkit_block %}<li>{% endblock %} <a href="https://qrcode.antfu.me/">Qrcode-toolkit(website)</a></li>
                             </ul>
                         </li>
                     </ul>
