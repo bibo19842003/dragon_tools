@@ -1,0 +1,32 @@
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Dragon Tools</a>
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        {% block index_block %}<li>{% endblock %} <a href="{% url 'tools:index' %}">Home</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Qrcode<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% block decode_qr_code_block %}<li>{% endblock %} <a href="{% url 'tools:decode_qr_code' %}">Decode</a></li>
+								{% block create_wifi_qrcode_pic_block %}<li>{% endblock %} <a href="{% url 'tools:create_wifi_qrcode_pic' %}">Wifi Code</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
+
+    </div>
+</nav>
+

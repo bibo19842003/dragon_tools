@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block create_wifi_qrcode_pic_block %}<li class="active">{% endblock %}
+{% block body_block %}
+{% load static %}
+
+<div class="form-horizontal">
+
+	<div class="row">
+		<div class="col-sm-offset-2 col-sm-2"><h3>生成 Wifi 二维码图片</h3></div>
+	</div>	
+
+    </br>
+
+    <div class="form-group">
+        <label for="wifi_name" class="col-sm-2 control-label">Wifi 名称</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="wifi_name" id="wifi_name" required="required">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="wifi_pass" class="col-sm-2 control-label">Wifi 密码</label>
+        <div class="col-sm-3">
+			<input type="text" class="form-control" name="wifi_pass" id="wifi_pass" required="required">
+        </div>
+    </div>
+	
+    <div class="form-group">
+        <label for="wifi_pass" class="col-sm-2 control-label">生成的 Wifi 图片</label>
+        <div class="col-sm-3">
+			<img src="{% static 'img/empty_370_370.png' %}" alt="Pulpit rock" width="370" height="370" name="wifi_pic" id="wifi_pic">
+        </div>
+    </div>
+	
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="生成图片" id="make" name="make">
+			<a class="btn btn-primary" id="download" name="download" href="#" target="_blank">下载图片</a>  
+        </div>
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+$(function () {
+    $('#make').click(function () {
+	    $("#make").addClass("disabled");
+        wifi_name = $('#wifi_name').val();
+        wifi_pass = $('#wifi_pass').val();
+
+        $.ajax({
+            url:'/create_wifi_qrcode_pic/',
+            type:'post',
+            data:{'wifi_name':wifi_name, 'wifi_pass':wifi_pass, 'csrfmiddlewaretoken':'{{ csrf_token }}'},
+            dataType:'json',
+            //回调函数
+            success:function (data) {
+                if (data.res == 1){
+				    $("#make").removeClass("disabled");
+					wifi_pic_name = data.pic_name
+					wifi_pic_path = "/media/wifi_pic/" + wifi_pic_name
+					$('#wifi_pic').attr("src", wifi_pic_path);
+					$('#download').attr("href", wifi_pic_path);
+					$('#download').attr("download", wifi_pic_name);
+                    alert('Wifi 二维码生成成功');
+                }
+                else {
+				    $("#make").removeClass("disabled");
+                    alert('Wifi 二维码生成失败');
+                }
+			}})})})
+
+</script>
+
+
+{% endblock %}
+
