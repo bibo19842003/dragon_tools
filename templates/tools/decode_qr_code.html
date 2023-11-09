@@ -9,10 +9,16 @@
  				    <div class="col-sm-offset-2 col-sm-8 col-md-8 col-xs-8">
 					    <h3>解析二维码图片</h3>
 						<br>
-						<input type="file" name="uploadfile" id="uploadfile"/>
+						<input type="file" name="uploadfile" id="uploadfile" accept="image/*"/>
 						<br>
-						<br>
-					</div>
+ 				    </div>
+
+ 				    <div class="form-group">
+ 				        <div class="col-sm-offset-2 col-sm-3">
+ 				            <div class="image_preview"></div>
+ 				            <br>
+ 				        </div>
+ 				    </div>
 					
  				    <div class="col-sm-offset-2 col-sm-8 col-md-8 col-xs-8">
  				        <textarea class="form-control" rows="5" id="qr_content" name="qr_content"></textarea>
@@ -69,6 +75,34 @@
         })
     })
 
+
+
+// 预览上传 预览上传 预览上传
+$("#uploadfile").on("change", function(e) {
+    var file = e.target.files[0]; //获取图片资源
+
+    // 只选择图片文件
+    if (!file.type.match('image.*')) {
+        return false;
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file); // 读取文件
+
+    // 渲染文件
+    reader.onload = function(arg) {
+
+        let imgxxx = new Image()
+        imgxxx.src = arg.target.result
+        p_display_width = 300
+        p_display_height = parseInt(p_display_width * imgxxx.height / imgxxx.width)
+        p_display_width = p_display_width.toString()
+        p_display_height = p_display_height.toString()
+        
+        var img = '<img width="' + p_display_width + '" height="' + p_display_height + '" src="' + arg.target.result + '" alt="preview"/>';
+        $(".image_preview").empty().append(img);
+    }
+});
 
 </script>
 
