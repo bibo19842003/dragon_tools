@@ -1,0 +1,579 @@
+{% extends 'base.html' %}
+{% block image_block %}<li class="active">{% endblock %}
+{% block body_block %}
+{% load static %}
+	
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8 col-md-8 col-xs-8">
+                <h3>图片处理</h3>
+                <br>
+            </div>
+					
+            <div class="col-sm-offset-2 col-sm-8 col-md-8 col-xs-8">
+
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#resize_not_crop" data-toggle="tab">图片缩小</a></li>
+                    <li><a href="#resize_not_crop_batch" data-toggle="tab">缩小_批量</a></li>
+                    <li><a href="#resize_crop" data-toggle="tab">缩小和裁减</a></li>
+                    <li><a href="#resize_crop_batch" data-toggle="tab">缩小和裁减_批量</a></li>
+                </ul>
+                
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="resize_not_crop">
+                        <br>
+                        <br>
+                        
+                        <div class="form-horizontal">
+                        
+                            <div class="form-group">
+                                <label for="resize_not_crop_uploadfile" class="col-sm-2 control-label">上传图片</label>
+                                <div class="col-sm-3">
+                                    <input type="file" name="resize_not_crop_uploadfile" id="resize_not_crop_uploadfile" accept="image/*"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <div class="resize_not_crop_image_preview"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_not_crop_width" class="col-sm-2 control-label">缩小后的宽度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_not_crop_width" id="resize_not_crop_width">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_not_crop_height" class="col-sm-2 control-label">缩小后的高度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_not_crop_height" id="resize_not_crop_height">
+                                </div>
+                            </div>
+	
+                            <div class="form-group">
+                                <label for="resize_not_crop_image" class="col-sm-2 control-label">缩小后的图片</label>
+                                <div class="col-sm-3">
+                                    <img name="resize_not_crop_image" id="resize_not_crop_image">
+                                </div>
+                                </div>
+	
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <input type="submit" class="btn btn-primary" value="生成图片" id="resize_not_crop_submit" name="resize_not_crop_submit">
+                                    <a class="btn btn-primary" id="resize_not_crop_download" name="resize_not_crop_download" href="#" target="_blank">下载图片</a>  
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="tab-pane fade" id="resize_not_crop_batch">
+                        <br>
+                        <br>
+                        
+                        <div class="form-horizontal">
+                        
+                            <div class="form-group">
+                                <label for="resize_not_crop_uploadfile_batch" class="col-sm-2 control-label">上传图片</label>
+                                <div class="col-sm-3">
+                                    <input type="file" name="resize_not_crop_uploadfile_batch" id="resize_not_crop_uploadfile_batch" accept="image/*" multiple="multiple"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <div class="resize_not_crop_image_preview_batch"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_not_crop_width_batch" class="col-sm-2 control-label">缩小后的宽度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_not_crop_width_batch" id="resize_not_crop_width_batch">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_not_crop_height_batch" class="col-sm-2 control-label">缩小后的高度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_not_crop_height_batch" id="resize_not_crop_height_batch">
+                                </div>
+                            </div>
+	
+                            <div class="form-group">
+                                <label for="resize_not_crop_image_batch" class="col-sm-2 control-label">缩小后的图片</label>
+                                <div class="col-sm-3">
+                                    <img name="resize_not_crop_image_batch" id="resize_not_crop_image_batch">
+                                </div>
+                                </div>
+	
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <input type="submit" class="btn btn-primary" value="生成图片" id="resize_not_crop_submit_batch" name="resize_not_crop_submit_batch">
+                                    <a class="btn btn-primary" id="resize_not_crop_download_batch" name="resize_not_crop_download_batch" href="#" target="_blank">下载图片</a>  
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="tab-pane fade" id="resize_crop">
+                        <br>
+                        <br>
+                        
+                        <div class="form-horizontal">
+                        
+                            <div class="form-group">
+                                <label for="resize_crop_uploadfile" class="col-sm-2 control-label">上传图片</label>
+                                <div class="col-sm-3">
+                                    <input type="file" name="resize_crop_uploadfile" id="resize_crop_uploadfile" accept="image/*"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <div class="resize_crop_image_preview"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_crop_width" class="col-sm-2 control-label">缩小后的宽度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_crop_width" id="resize_crop_width">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_crop_height" class="col-sm-2 control-label">缩小后的高度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_crop_height" id="resize_crop_height">
+                                </div>
+                            </div>
+	
+                            <div class="form-group">
+                                <label for="resize_crop_image" class="col-sm-2 control-label">缩小后的图片</label>
+                                <div class="col-sm-3">
+                                    <img name="resize_crop_image" id="resize_crop_image">
+                                </div>
+                                </div>
+	
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <input type="submit" class="btn btn-primary" value="生成图片" id="resize_crop_submit" name="resize_crop_submit">
+                                    <a class="btn btn-primary" id="resize_crop_download" name="resize_crop_download" href="#" target="_blank">下载图片</a>  
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="tab-pane fade" id="resize_crop_batch">
+                        <br>
+                        <br>
+                        
+                        <div class="form-horizontal">
+                        
+                            <div class="form-group">
+                                <label for="resize_crop_uploadfile_batch" class="col-sm-2 control-label">上传图片</label>
+                                <div class="col-sm-3">
+                                    <input type="file" name="resize_crop_uploadfile_batch" id="resize_crop_uploadfile_batch"  accept="image/*" multiple="multiple"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <div class="resize_crop_image_preview_batch"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_crop_width_batch" class="col-sm-2 control-label">缩小后的宽度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_crop_width_batch" id="resize_crop_width_batch">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resize_crop_height_batch" class="col-sm-2 control-label">缩小后的高度</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="resize_crop_height_batch" id="resize_crop_height_batch">
+                                </div>
+                            </div>
+	
+                            <div class="form-group">
+                                <label for="resize_crop_image_batch" class="col-sm-2 control-label">缩小后的图片</label>
+                                <div class="col-sm-3">
+                                    <img name="resize_crop_image_batch" id="resize_crop_image_batch">
+                                </div>
+                                </div>
+	
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <input type="submit" class="btn btn-primary" value="生成图片" id="resize_crop_submit_batch" name="resize_crop_submit_batch">
+                                    <a class="btn btn-primary" id="resize_crop_download_batch" name="resize_crop_download_batch" href="#" target="_blank">下载图片</a>  
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        // 上传 上传 上传 和 显示处理 显示处理 显示处理
+        $('#resize_not_crop_submit').on('click', function () {	
+            let files = $('#resize_not_crop_uploadfile')[0].files;
+            resize_not_crop_width = $('#resize_not_crop_width').val();
+            resize_not_crop_height = $('#resize_not_crop_height').val();
+
+            //上传文件
+            let fd = new FormData();
+            fd.append('resize_not_crop_uploadfile', files[0]);
+            fd.append('resize_not_crop_width', resize_not_crop_width);
+            fd.append('resize_not_crop_height', resize_not_crop_height);
+
+            //发起jquery  ajax请求
+            $.ajax({
+                method: 'post',
+                url:'/resize_not_crop_1_image/',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.res == 10){
+                        alert('上传文件不能为空');
+                    }
+                    else if (data.res == 11){
+                        alert('文件后缀名不正确');
+                    }
+                    else if (data.res == 16){
+                        alert('宽度不能为空');
+                    }
+                    else if (data.res == 17){
+                        alert('宽度输入不正确');
+                    }
+                    else if (data.res == 18){
+                        alert('高度不能为空');
+                    }
+                    else if (data.res == 19){
+                        alert('高度输入不正确');
+                    }
+                    else if (data.res == 2){
+                        alert('宽度或者高度小于上传图片的大小');
+                    }
+                    else if (data.res == 1){
+                        ratio = data.ratio
+                        display_width = 300
+                        display_height = parseInt(300 * data.i_height / data.i_width)
+                        pic_name = data.pic_name
+                        pic_path = "/media/tmp_handle_image_result/" + pic_name
+                        $('#resize_not_crop_image').attr("src", pic_path);
+                        $('#resize_not_crop_image').attr("width", display_width);
+                        $('#resize_not_crop_image').attr("height", display_height);
+                        
+                        $('#resize_not_crop_download').attr("href", pic_path);
+                        $('#resize_not_crop_download').attr("download", pic_name);
+                        alert('图片处理成功');
+                    }
+                    else {
+                        alert('图片处理失败');
+                    }
+                }
+            })
+        })
+
+
+
+        $('#resize_not_crop_submit_batch').on('click', function () {
+            let files = $('#resize_not_crop_uploadfile_batch')[0].files;
+            resize_not_crop_width_batch = $('#resize_not_crop_width_batch').val();
+            resize_not_crop_height_batch = $('#resize_not_crop_height_batch').val();
+
+            //上传文件
+            let fd = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                fd.append("resize_not_crop_uploadfile_batch", files[i]);
+            }
+            // fd.append('resize_not_crop_uploadfile_batch', files);
+            fd.append('resize_not_crop_width_batch', resize_not_crop_width_batch);
+            fd.append('resize_not_crop_height_batch', resize_not_crop_height_batch);
+
+            //发起jquery  ajax请求
+            $.ajax({
+                method: 'post',
+                url:'/resize_not_crop_more_image/',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.res == 10){
+                        alert('上传文件不能为空');
+                    }
+                    else if (data.res == 11){
+                        alert('文件后缀名不正确');
+                    }
+                    else if (data.res == 16){
+                        alert('宽度不能为空');
+                    }
+                    else if (data.res == 17){
+                        alert('宽度输入不正确');
+                    }
+                    else if (data.res == 18){
+                        alert('高度不能为空');
+                    }
+                    else if (data.res == 19){
+                        alert('高度输入不正确');
+                    }
+                    else if (data.res == 2){
+                        alert('宽度或者高度小于上传图片的大小');
+                    }
+                    else if (data.res == 3){
+                        alert('图片批量缩小时失败，请检查上传图片是否为图片');
+                    }
+                    else if (data.res == 1){
+                        pic_name = data.pic_name
+                        pic_path = "/media/tmp_handle_image_result/" + pic_name
+                        $('#resize_not_crop_download_batch').attr("href", pic_path);
+                        $('#resize_not_crop_download_batch').attr("download", pic_name);
+                        alert('图片处理成功');
+                    }
+                    else {
+                        alert('图片处理失败');
+                    }
+                }
+            })
+        })
+
+
+
+        $('#resize_crop_submit').on('click', function () {	
+            let files = $('#resize_crop_uploadfile')[0].files;
+            resize_crop_width = $('#resize_crop_width').val();
+            resize_crop_height = $('#resize_crop_height').val();
+
+            //上传文件
+            let fd = new FormData();
+            fd.append('resize_crop_uploadfile', files[0]);
+            fd.append('resize_crop_width', resize_crop_width);
+            fd.append('resize_crop_height', resize_crop_height);
+
+            //发起jquery  ajax请求
+            $.ajax({
+                method: 'post',
+                url:'/resize_crop_1_image/',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.res == 10){
+                        alert('上传文件不能为空');
+                    }
+                    else if (data.res == 11){
+                        alert('文件后缀名不正确');
+                    }
+                    else if (data.res == 16){
+                        alert('宽度不能为空');
+                    }
+                    else if (data.res == 17){
+                        alert('宽度输入不正确');
+                    }
+                    else if (data.res == 18){
+                        alert('高度不能为空');
+                    }
+                    else if (data.res == 19){
+                        alert('高度输入不正确');
+                    }
+                    else if (data.res == 2){
+                        alert('宽度或者高度小于上传图片的大小');
+                    }
+                    else if (data.res == 1){
+                        ratio = data.ratio
+                        display_width = 300
+                        display_height = parseInt(300 * data.i_height / data.i_width)
+                        pic_name = data.pic_name
+                        pic_path = "/media/tmp_handle_image_result/" + pic_name
+
+                        let imgxxx = new Image()
+                        imgxxx.src = pic_path
+                        display_width = 300
+                        display_height = parseInt(display_width * imgxxx.height / imgxxx.width)
+
+                        $('#resize_crop_image').attr("src", pic_path);
+                        $('#resize_crop_image').attr("width", display_width);
+                        $('#resize_crop_image').attr("height", display_height);
+                        
+                        $('#resize_crop_download').attr("href", pic_path);
+                        $('#resize_crop_download').attr("download", pic_name);
+                        alert('图片处理成功');
+                    }
+                    else {
+                        alert('图片处理失败');
+                    }
+                }
+            })
+        })
+
+
+
+        $('#resize_crop_submit_batch').on('click', function () {
+            let files = $('#resize_crop_uploadfile_batch')[0].files;
+            resize_crop_width_batch = $('#resize_crop_width_batch').val();
+            resize_crop_height_batch = $('#resize_crop_height_batch').val();
+
+            //上传文件
+            let fd = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                fd.append("resize_crop_uploadfile_batch", files[i]);
+            }
+            // fd.append('resize_crop_uploadfile_batch', files);
+            fd.append('resize_crop_width_batch', resize_crop_width_batch);
+            fd.append('resize_crop_height_batch', resize_crop_height_batch);
+
+            //发起jquery  ajax请求
+            $.ajax({
+                method: 'post',
+                url:'/resize_crop_more_image/',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.res == 10){
+                        alert('上传文件不能为空');
+                    }
+                    else if (data.res == 11){
+                        alert('文件后缀名不正确');
+                    }
+                    else if (data.res == 16){
+                        alert('宽度不能为空');
+                    }
+                    else if (data.res == 17){
+                        alert('宽度输入不正确');
+                    }
+                    else if (data.res == 18){
+                        alert('高度不能为空');
+                    }
+                    else if (data.res == 19){
+                        alert('高度输入不正确');
+                    }
+                    else if (data.res == 2){
+                        alert('宽度或者高度小于上传图片的大小');
+                    }
+                    else if (data.res == 3){
+                        alert('图片批量缩小时失败，请检查上传图片是否为图片');
+                    }
+                    else if (data.res == 1){
+                        pic_name = data.pic_name
+                        pic_path = "/media/tmp_handle_image_result/" + pic_name
+                        $('#resize_crop_download_batch').attr("href", pic_path);
+                        $('#resize_crop_download_batch').attr("download", pic_name);
+                        alert('图片处理成功');
+                    }
+                    else {
+                        alert('图片处理失败');
+                    }
+                }
+            })
+        })
+    })
+
+
+// 预览上传 预览上传 预览上传
+$("#resize_not_crop_uploadfile").on("change", function(e) {
+    var file = e.target.files[0]; //获取图片资源
+
+    // 只选择图片文件
+    if (!file.type.match('image.*')) {
+        return false;
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file); // 读取文件
+
+    // 渲染文件
+    reader.onload = function(arg) {
+
+        let imgxxx = new Image()
+        imgxxx.src = arg.target.result
+        p_display_width = 300
+        p_display_height = parseInt(p_display_width * imgxxx.height / imgxxx.width)
+        p_display_width = p_display_width.toString()
+        p_display_height = p_display_height.toString()
+        
+        var img = '<img width="' + p_display_width + '" height="' + p_display_height + '" src="' + arg.target.result + '" alt="preview"/>';
+        $(".resize_not_crop_image_preview").empty().append(img);
+    }
+});
+
+
+// more image upload
+
+
+
+
+
+
+
+$("#resize_crop_uploadfile").on("change", function(e) {
+    var file = e.target.files[0]; //获取图片资源
+
+    // 只选择图片文件
+    if (!file.type.match('image.*')) {
+        return false;
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file); // 读取文件
+
+    // 渲染文件
+    reader.onload = function(arg) {
+
+        let imgxxx = new Image()
+        imgxxx.src = arg.target.result
+        p_display_width = 300
+        p_display_height = parseInt(p_display_width * imgxxx.height / imgxxx.width)
+        p_display_width = p_display_width.toString()
+        p_display_height = p_display_height.toString()
+        
+        var img = '<img width="' + p_display_width + '" height="' + p_display_height + '" src="' + arg.target.result + '" alt="preview"/>';
+        $(".resize_crop_image_preview").empty().append(img);
+    }
+});
+
+
+
+</script>
+
+
+
+{% endblock %}
+
